@@ -1,0 +1,82 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="da" xml:id="ParlaMint-DK_2015-02-03-20141-M51" ana="#parla.sitting #reference">
+    <teiHeader>
+    <fileDesc>
+    <titleStmt>
+    <title type="main" xml:lang="en">The Norwegian parliamentary corpus ParlaMint-NO, Session XXXX, Sitting XXX [ParlaMint]</title>
+    <title type="sub" xml:lang="en">Hansard of the session of the Norwegian Parliament (Stortinget), 20141, M51 (2015-02-03), final version</title>
+    <meeting n="20141" ana="#parla.session">20141</meeting>
+    <meeting n="51" ana="#parla.sitting">M51</meeting>
+    <respStmt>
+    <persName>Lars Magne Tungland</persName>
+    <resp xml:lang="en">Data retrieval and conversion to TEI</resp>
+    </respStmt>
+    <funder>
+    <orgName xml:lang="en">The CLARIN research infrastructure</orgName>
+    </funder>
+    <funder>
+    <orgName xml:lang="en">European Commission</orgName>
+    </funder>
+    <funder>
+    <orgName xml:lang="en">National Library of Norway</orgName>
+    </funder>
+    </titleStmt>
+    <editionStmt>
+    <edition>0.1</edition>
+    </editionStmt>
+    <extent>
+    </extent>
+    <publicationStmt>
+    <publisher>
+    <orgName xml:lang="en">The CLARIN research infrastructure</orgName>
+    <ref target="https://www.clarin.eu/">www.clarin.eu</ref>
+    </publisher>
+    <idno subtype="handle" type="URI">http://hdl.handle.net/11356/1432</idno>
+    <availability status="free">
+    <licence>http://creativecommons.org/licenses/by/4.0/</licence>
+    <p xml:lang="en">
+    This work is licensed under the
+    <ref target="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</ref>
+    .
+    </p>
+    </availability>
+    <date when="2022-08-01">2022-08-01</date>
+    </publicationStmt>
+    <sourceDesc>
+    <bibl>
+    <title type="main" xml:lang="en">Hansards of the Norwegian Parliament</title>
+    <publisher xml:lang="en">The Norwegian Parliament</publisher>
+    <idno type="URI">https://www.stortinget.no/</idno>
+    <date when="2022-08-01">2022-08-01</date>
+    </bibl>
+    </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+    <projectDesc>
+    <p xml:lang="en">
+    <ref target="https://www.clarin.eu/content/parlamint">ParlaMint</ref>
+    </p>
+    </projectDesc>
+    <tagsDecl>
+    <namespace name="http://www.tei-c.org/ns/1.0">
+    </namespace>
+    </tagsDecl>
+    </encodingDesc>
+    <profileDesc>
+    <settingDesc>
+    <setting>
+    <name type="address">Karl Johans Gate 22</name>
+    <name type="city">0026 Oslo</name>
+    <name type="country" key="NO">Norway</name>
+    <date ana="#parla.sitting" when="2022-08-01">2022-08-01</date>
+    </setting>
+    </settingDesc>
+    </profileDesc>
+    <revisionDesc xml:lang="en">
+    <change when="2022-08-01">
+    <name>Lars Magne Tungland</name>
+    : Generated corpus in ParlaMint.
+    </change>
+    </revisionDesc>
+    </teiHeader>
+    <text/>
+    </TEI>

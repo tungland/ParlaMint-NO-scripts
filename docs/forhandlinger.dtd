@@ -1,0 +1,656 @@
+<!ENTITY % TIT  "(#PCDATA | Uth | Endring | Sup | Sub | Fotnote | DagsordenNR)*" >
+
+<!ENTITY % Uttalelse  "(A | Liste | Sitat | Tbl | Figgrp)*" >
+
+<!ENTITY % a.vot  "(A | Presinnlegg | Hovedinnlegg | Replikk | Merknad | Liste | 
+               Subtit)*" >
+
+<!ELEMENT A  (#PCDATA | Uth | Endring | Sup | Sub | Fotnote | Refnr | Navn)* >
+
+<!ATTLIST A
+               Type (Uinnrykk | Minnrykk | Sentrert | Blanklinje | Head | 
+               Blanklinjeminnrykk)   #IMPLIED 
+               Id  ID    #IMPLIED 
+               align (left | center | right)   #IMPLIED  >
+
+<!ELEMENT Aar  (#PCDATA) >
+
+<!ATTLIST Aar
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Altsek1  (Tittel,%Uttalelse;,(Altsek2 | Altsek3)*) >
+
+<!ATTLIST Altsek1
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Altsek2  (Tittel,%Uttalelse;,Altsek3*) >
+
+<!ATTLIST Altsek2
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Altsek3  (Tittel,%Uttalelse;) >
+
+<!ATTLIST Altsek3
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Avbrutt  (A) >
+
+<!ATTLIST Avbrutt
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Beskr  (A | Liste)* >
+
+<!ATTLIST Beskr
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Bildefil  (#PCDATA) >
+
+<!ELEMENT BokstavSeksjon  (Tittel,Undertittel?,%Uttalelse;,(Votering | Presinnlegg | 
+               Hovedinnlegg | Replikk)*,(Rammeomraade | BokstavSeksjonLiten | 
+               RomertallSeksjon | RomertallsGruppe)*) >
+
+<!ATTLIST BokstavSeksjon
+               Id  ID    #IMPLIED 
+               Storbokstav  CDATA    #IMPLIED  >
+
+<!ELEMENT BokstavSeksjonLiten  (Tittel,Undertittel?,%Uttalelse;,RomertallSeksjon*) >
+
+<!ATTLIST BokstavSeksjonLiten
+               Id  ID    #IMPLIED 
+               Litenbokstav  CDATA    #IMPLIED  >
+
+<!ELEMENT Dagsorden  (Tittel,DagsordenSak+) >
+
+<!ATTLIST Dagsorden
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT DagsordenNR  (#PCDATA) >
+
+<!ELEMENT DagsordenSak  (Liste) >
+
+<!ATTLIST DagsordenSak
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Dato  (#PCDATA) >
+
+<!ATTLIST Dato
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Endring  (#PCDATA) >
+
+<!ATTLIST Endring
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Fig   EMPTY  >
+
+<!ATTLIST Fig
+               Id  ID    #IMPLIED 
+               navn  CDATA    #REQUIRED 
+               entity  ENTITY    #IMPLIED 
+               file  CDATA    #IMPLIED 
+               dpi  NMTOKEN    #IMPLIED 
+               impsize  CDATA    #IMPLIED 
+               impby (ref | copy)   #IMPLIED 
+               sideways  NMTOKEN    #IMPLIED 
+               impang  CDATA    #IMPLIED 
+               xoffset  CDATA    #IMPLIED 
+               yoffset  CDATA    #IMPLIED 
+               position  CDATA    #IMPLIED 
+               align  CDATA    #IMPLIED 
+               cropped  NMTOKEN    #IMPLIED 
+               float  NMTOKEN    #IMPLIED 
+               width  CDATA    #IMPLIED 
+               height  CDATA    #IMPLIED 
+               angle  CDATA    #IMPLIED 
+               bloffset  CDATA    #IMPLIED 
+               nsoffsest  CDATA    #IMPLIED  >
+
+<!ELEMENT Figgrp  (Fig?,(Tittel?,Bildefil,(A | Liste)*,Beskr?,Note?,Kilde?)) >
+
+<!ATTLIST Figgrp
+               Id  ID    #IMPLIED 
+               Variant (A | B | C | D)   #IMPLIED  >
+
+<!ELEMENT Folkevalgte  (Stortingstidende,Inneholdende,Aar,Periode,Forhtit,A*,Fylke*,
+               Sammentreden) >
+
+<!ATTLIST Folkevalgte
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Forhandlinger  (Omslag?,Mote+) >
+
+<!ATTLIST Forhandlinger
+               Id  ID    #IMPLIED 
+               Status (Arbeid | Komplett | Kvalitetssikret)  "Arbeid"
+                >
+
+<!ELEMENT Forhnr  (#PCDATA) >
+
+<!ATTLIST Forhnr
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Forhtit  (#PCDATA) >
+
+<!ATTLIST Forhtit
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Forkortelse  (#PCDATA) >
+
+<!ATTLIST Forkortelse
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Fotnote  (#PCDATA | Uth | Sup | Sub)* >
+
+<!ATTLIST Fotnote
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Fylke  (Tittel,Repr,Vara+) >
+
+<!ATTLIST Fylke
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Handling  (A+) >
+
+<!ATTLIST Handling
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Hevet  (A+) >
+
+<!ATTLIST Hevet
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Hovedinnlegg  (A,(A | Liste | Sitat)*) >
+
+<!ATTLIST Hovedinnlegg
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Hovedseksjon  (Saker+) >
+
+<!ATTLIST Hovedseksjon
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Inneholdende  (#PCDATA) >
+
+<!ATTLIST Inneholdende
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Innhold  (Dato,(Merknad?,Saktittel,Side)+) >
+
+<!ATTLIST Innhold
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Interpellasjon  (Sakshode,Liste?,(Presinnlegg | Hovedinnlegg | Replikk | 
+               Merknad | Subtit | Referanse)*) >
+
+<!ATTLIST Interpellasjon
+               Id  ID    #IMPLIED 
+               sakenFortsetter  CDATA    #IMPLIED 
+               sakID  CDATA    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               sammenslatteSaker  CDATA    #IMPLIED  >
+
+<!ELEMENT Kilde  (A | Liste)* >
+
+<!ATTLIST Kilde
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Kongen  (A,(A | Liste | Sitat)*) >
+
+<!ATTLIST Kongen
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Liste  (Pkt+) >
+
+<!ATTLIST Liste
+               Type (Alfa | Num | Rom | Strek | Fri | Punkt | Dagsorden)  
+                #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Lovkap  (Stikktittel?,Tittel,Undertittel?,(A | Liste)*,Paragraf*) >
+
+<!ATTLIST Lovkap
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Lovseksjon  (Tittel,(A | Liste | Tbl | Presinnlegg | Hovedinnlegg | 
+               Replikk | Merknad)*,VedtakTilLov?) >
+
+<!ATTLIST Lovseksjon
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Merknad  (Avbrutt | Handling)+ >
+
+<!ATTLIST Merknad
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Mote  (Startseksjon,Hovedseksjon?,Sluttseksjon) >
+
+<!ATTLIST Mote
+               Id  ID    #IMPLIED 
+               moteID  CDATA    #IMPLIED  >
+
+<!ELEMENT Motestart  (Tittel,President,(Dagsorden | TilleggsDagsorden | Kongen | 
+               Presinnlegg | Hovedinnlegg | Replikk | Merknad | Subtit | Votering)*) >
+
+<!ATTLIST Motestart
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Navn  (#PCDATA) >
+
+<!ATTLIST Navn
+               Id  ID    #IMPLIED 
+               personID  CDATA    #IMPLIED  >
+
+<!ELEMENT Note  (A | Liste)* >
+
+<!ATTLIST Note
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT OmLoven  (A) >
+
+<!ATTLIST OmLoven
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Omslag  (Titgrp,Innhold?,Talere,Partibetegnelser) >
+
+<!ATTLIST Omslag
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Paragraf  (Stikktittel?,Tittel?,(Liste | A)*) >
+
+<!ATTLIST Paragraf
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Parti  (#PCDATA) >
+
+<!ATTLIST Parti
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Partibetegnelser  (Tittel,(Forkortelse,Partinavn)+) >
+
+<!ATTLIST Partibetegnelser
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Partinavn  (#PCDATA) >
+
+<!ATTLIST Partinavn
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Periode  (#PCDATA) >
+
+<!ATTLIST Periode
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Pkt  (A | Liste | Tbl)+ >
+
+<!ATTLIST Pkt
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT President  (A) >
+
+<!ATTLIST President
+               Id  ID    #IMPLIED 
+               personID  CDATA    #IMPLIED  >
+
+<!ELEMENT Presinnlegg  (A,(A | Liste | Sitat)*) >
+
+<!ATTLIST Presinnlegg
+               Id  ID    #IMPLIED  >
+
+<!--<!ELEMENT vedtak-del (tit?, (undertit?, (%s.sub;|paragraf|ledd)*)*) >-->
+<!ELEMENT Rammeomraade  (Tittel,Undertittel?,%Uttalelse;,(Votering | Presinnlegg | 
+               Hovedinnlegg | Replikk)*,RomertallSeksjon*) >
+
+<!ATTLIST Rammeomraade
+               Id  ID    #IMPLIED 
+               RammeNr  CDATA    #IMPLIED  >
+
+<!ELEMENT Referanse  (A?) >
+
+<!ATTLIST Referanse
+               Id  ID    #IMPLIED 
+               sammenslatteSaker  CDATA    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               sakID  CDATA    #IMPLIED 
+               debattDato  CDATA    #IMPLIED 
+               voteringsDato  CDATA    #IMPLIED  >
+
+<!ELEMENT Referat  (A | Liste | Votering)+ >
+
+<!ATTLIST Referat
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Refnr  (#PCDATA) >
+
+<!ATTLIST Refnr
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Replikk  (A,(A | Liste | Sitat)*) >
+
+<!ATTLIST Replikk
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Repr  (Tittel,Undertittel?,Liste+) >
+
+<!ATTLIST Repr
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT RomertallSeksjon  (Tittel,Undertittel?,(A | Liste | Paragraf | Lovkap | 
+               Tbl | Votering | Presinnlegg | Hovedinnlegg | Replikk | Altsek1 | 
+               Altsek2 | Altsek3)+) >
+
+<!ATTLIST RomertallSeksjon
+               Id  ID    #IMPLIED 
+               Romertall  CDATA    #IMPLIED  >
+
+<!ELEMENT RomertallsGruppe  (Tittel,Undertittel?,RomertallSeksjon+) >
+
+<!ELEMENT Sak  (Sakshode,(Presinnlegg | Hovedinnlegg | Replikk | Merknad | Subtit | 
+               Votering | Referanse)*) >
+
+<!ATTLIST Sak
+               Id  ID    #IMPLIED 
+               sakID  CDATA    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               sammenslatteSaker  CDATA    #IMPLIED 
+               sakenFortsetter  CDATA    #IMPLIED  >
+
+<!ELEMENT Sakdel  (Tittel,Saktittel?,(A | Liste | Tbl | Presinnlegg | Hovedinnlegg | 
+               Replikk | Merknad | Votering | Lovseksjon | Paragraf | Referanse)*) >
+
+<!ATTLIST Sakdel
+               Id  ID    #IMPLIED 
+               sakID  CDATA    #IMPLIED  >
+
+<!ELEMENT Saker  (Sporretime | Interpellasjon | Sak | Sakreferat | VoteringerStart | 
+               Voteringer)* >
+
+<!ATTLIST Saker
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Saknr  %TIT; >
+
+<!ATTLIST Saknr
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sakreferat  (Sakshode,(Presinnlegg | Hovedinnlegg | Replikk | Merknad | 
+               Votering | Liste | Referanse)*) >
+
+<!ATTLIST Sakreferat
+               Id  ID    #IMPLIED 
+               sakenFortsetter  CDATA    #IMPLIED 
+               sakID  CDATA    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               sammenslatteSaker  CDATA    #IMPLIED  >
+
+<!ELEMENT Sakshode  (Saknr,Saktittel) >
+
+<!ATTLIST Sakshode
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Saktittel  (A+) >
+
+<!ATTLIST Saktittel
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sammentreden  (Tittel,(Presinnlegg | Hovedinnlegg | Replikk | Merknad | 
+               Subtit | A | Liste | Votering)*,Referat?) >
+
+<!ATTLIST Sammentreden
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sesjon  (#PCDATA) >
+
+<!ATTLIST Sesjon
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Side  (#PCDATA) >
+
+<!ATTLIST Side
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sitat  (A | Liste | Tbl | Figgrp | Sitat)+ >
+
+<!ATTLIST Sitat
+               Type (Uinnrykk | Minnrykk | Sentrert | Blanklinje | Head | 
+               Blanklinjeminnrykk)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sluttseksjon  (%a.vot;,Hevet,A*,Liste*) >
+
+<!ATTLIST Sluttseksjon
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Spm  (Tittel,(A | Liste | Sitat)*,(Presinnlegg | Hovedinnlegg | Replikk | 
+               Merknad | Subtit | Referanse)*) >
+
+<!ATTLIST Spm
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sporretime  (Sakshode,Liste?,(Presinnlegg | Hovedinnlegg | Replikk | 
+               Merknad | Subtit | Referanse)*,Spm*) >
+
+<!ATTLIST Sporretime
+               Id  ID    #IMPLIED 
+               sakenFortsetter  CDATA    #IMPLIED 
+               sakID  CDATA    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               sammenslatteSaker  CDATA    #IMPLIED  >
+
+<!ELEMENT Startseksjon  (Folkevalgte | Motestart) >
+
+<!ATTLIST Startseksjon
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Stikktittel  %TIT; >
+
+<!ATTLIST Stikktittel
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Stortingstidende  (#PCDATA) >
+
+<!ATTLIST Stortingstidende
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sub  (#PCDATA | Uth | Fotnote)* >
+
+<!ATTLIST Sub
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Subtit  %TIT; >
+
+<!ATTLIST Subtit
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Sup  (#PCDATA | Uth | Fotnote)* >
+
+<!ATTLIST Sup
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Talere  (Tittel,(Navn,Parti,Side)+) >
+
+<!ATTLIST Talere
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Tbl  (table,(Kilde | Note)*)* >
+
+<!ATTLIST Tbl
+               Id  ID    #IMPLIED 
+               Kol (1 | 2)  "2"
+               Sider (Flere)   #IMPLIED 
+               TOC (NEI)   #IMPLIED 
+               Tabletag (Tabell-A | Tabell-B | Tabell-C | Tabell-D)   #IMPLIED  >
+
+<!ELEMENT TilleggsDagsorden  (A+,Tittel,DagsordenSak+) >
+
+<!ATTLIST TilleggsDagsorden
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Tit-LovvedtakStorBokstav  %TIT; >
+
+<!ATTLIST Tit-LovvedtakStorBokstav
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Titgrp  (Figgrp,Tittel,Undertittel,Forhnr,Dato,Sesjon) >
+
+<!ATTLIST Titgrp
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Tittel  %TIT; >
+
+<!ATTLIST Tittel
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Undertittel  %TIT; >
+
+<!ATTLIST Undertittel
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Uth  (#PCDATA | Fotnote | Sup | Sub)* >
+
+<!ATTLIST Uth
+               Type (Kursiv | Halvfet | Halvfet-Kursiv | Sperret | RETT)  
+                #REQUIRED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Vara  (Tittel?,(Undertittel?,Liste)+) >
+
+<!ATTLIST Vara
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT VedtakL  (Tittel? | VedtakTilLov)+ >
+
+<!ATTLIST VedtakL
+               Id  ID    #IMPLIED  >
+
+<!--<!ELEMENT vedtak (tit*, (%s.sub;|paragraf|lovtit)*, (vedtak-del)*) >
+<!ELEMENT vedtak (tit*, (%s.sub;|paragraf|lovtit)*, (vedtak)*) >-->
+<!ELEMENT VedtakS  (Tittel,Undertittel?,%Uttalelse;,(Votering | Presinnlegg | 
+               Hovedinnlegg | Replikk)*,(Altsek1 | Altsek2 | Altsek3)*,(
+               BokstavSeksjon | Rammeomraade | RomertallSeksjon | Referanse)*) >
+
+<!ATTLIST VedtakS
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT VedtakTilLov  (Tit-LovvedtakStorBokstav?,Tittel,OmLoven?,(
+               RomertallSeksjon | A | Liste | Paragraf | Lovkap | Altsek1 | Altsek2 | 
+               Altsek3 | Votering | Presinnlegg | Hovedinnlegg | Replikk | 
+               Referanse)+) >
+
+<!ATTLIST VedtakTilLov
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT Votering  (Tittel | A | Presinnlegg | Hovedinnlegg | Replikk | Merknad | 
+               Liste)* >
+
+<!ATTLIST Votering
+               Id  ID    #IMPLIED 
+               vot  CDATA    #IMPLIED  >
+
+<!ELEMENT Voteringer  (Sakdel+,(VedtakS | VedtakL)*) >
+
+<!ATTLIST Voteringer
+               Id  ID    #IMPLIED 
+               saksKartNr  CDATA    #IMPLIED 
+               debattDato  CDATA    #IMPLIED 
+               tidspunkt  CDATA    #IMPLIED 
+               sakID  CDATA    #IMPLIED  >
+
+<!ELEMENT VoteringerStart  (Tittel,(A | Presinnlegg | Hovedinnlegg | Replikk | 
+               Merknad | Subtit | Liste)*,Voteringer+) >
+
+<!ATTLIST VoteringerStart
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT colspec   EMPTY  >
+
+<!ATTLIST colspec
+               colnum  NMTOKEN    #IMPLIED 
+               colname  NMTOKEN    #IMPLIED 
+               colwidth  CDATA    #IMPLIED 
+               colsep  NMTOKEN    #IMPLIED 
+               rowsep  NMTOKEN    #IMPLIED 
+               align (left | right | center | justify | char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  NMTOKEN    #IMPLIED  >
+
+<!ELEMENT entry  (A | Liste)* >
+
+<!ATTLIST entry
+               colname  NMTOKEN    #IMPLIED 
+               spanname  NMTOKEN    #IMPLIED 
+               namest  NMTOKEN    #IMPLIED 
+               nameend  NMTOKEN    #IMPLIED 
+               morerows  NMTOKEN    #IMPLIED 
+               colsep  NMTOKEN    #IMPLIED 
+               rowsep  NMTOKEN    #IMPLIED 
+               align (left | right | center | justify | char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  NMTOKEN    #IMPLIED 
+               rotate  NMTOKEN    #IMPLIED 
+               valign (top | middle | bottom)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT row  (entry+) >
+
+<!ATTLIST row
+               rowsep  NMTOKEN    #IMPLIED 
+               valign (top | middle | bottom)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT spanspec   EMPTY  >
+
+<!ATTLIST spanspec
+               namest  NMTOKEN    #REQUIRED 
+               nameend  NMTOKEN    #REQUIRED 
+               spanname  NMTOKEN    #REQUIRED 
+               colsep  NMTOKEN    #IMPLIED 
+               rowsep  NMTOKEN    #IMPLIED 
+               align (left | right | center | justify | char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  NMTOKEN    #IMPLIED  >
+
+<!ELEMENT table  (title?,tgroup+) >
+
+<!ATTLIST table
+               frame (top | bottom | topbot | all | sides | none)   #IMPLIED 
+               colsep  NMTOKEN    #IMPLIED 
+               rowsep  NMTOKEN    #IMPLIED 
+               tabstyle  NMTOKEN    #IMPLIED 
+               tocentry  NMTOKEN    #IMPLIED 
+               shortentry  NMTOKEN    #IMPLIED 
+               orient (port | land)   #IMPLIED 
+               pgwide  NMTOKEN    #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT tbody  (row+) >
+
+<!ATTLIST tbody
+               valign (top | middle | bottom)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT tfoot  (colspec*,row+) >
+
+<!ATTLIST tfoot
+               valign (top | middle | bottom)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT tgroup  (colspec*,spanspec*,thead?,tfoot?,tbody) >
+
+<!ATTLIST tgroup
+               cols  NMTOKEN    #REQUIRED 
+               tgroupstyle  NMTOKEN    #IMPLIED 
+               colsep  NMTOKEN    #IMPLIED 
+               align (left | right | center | justify | char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  NMTOKEN    #IMPLIED  >
+
+<!ELEMENT thead  (colspec*,row+) >
+
+<!ATTLIST thead
+               valign (top | middle | bottom)   #IMPLIED 
+               Id  ID    #IMPLIED  >
+
+<!ELEMENT title  (#PCDATA | Uth)* >
+
+<!ENTITY shy         "&#x00AD;"> <!-- SOFT HYPHEN -->
+

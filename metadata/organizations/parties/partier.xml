@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parti_liste xmlns:st="http://data.stortinget.no">
+    <org xml:id="party.A" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Arbeiderpartiet</orgName>
+        <orgName full="init" xml:lang="no">A</orgName>
+    </org>
+    <org xml:id="party.H" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Høyre</orgName>
+        <orgName full="init" xml:lang="no">H</orgName>
+    </org>
+    <org xml:id="party.FRP" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Fremskrittspartiet</orgName>
+        <orgName full="init" xml:lang="no">FrP</orgName>
+    </org>
+    <org xml:id="party.SP" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Senterpartiet</orgName>
+        <orgName full="init" xml:lang="no">Sp</orgName>
+    </org>
+    <org xml:id="party.SV" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Sosialistisk Venstreparti</orgName>
+        <orgName full="init" xml:lang="no">SV</orgName>
+    </org>
+    <org xml:id="party.KRF" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Kristelig Folkeparti</orgName>
+        <orgName full="init" xml:lang="no">KrF</orgName>
+    </org>
+    <org xml:id="party.V" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Venstre</orgName>
+        <orgName full="init" xml:lang="no">V</orgName>
+    </org>
+    <org xml:id="party.MDG" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Miljøpartiet De Grønne</orgName>
+        <orgName full="init" xml:lang="no">MDG</orgName>
+    </org>
+    <org xml:id="party.R" role="politicalParty">
+        <orgName full="yes" xml:lang="no">Rødt</orgName>
+        <orgName full="init" xml:lang="no">R</orgName>
+    </org>
+</parti_liste>

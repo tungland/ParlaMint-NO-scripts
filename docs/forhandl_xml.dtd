@@ -1,0 +1,317 @@
+<!-- DTD for Stortinget -->
+<!-- Vanlig bruk 
+ <!DOCTYPE forhandling PUBLIC "-//Stortingets EDB-seksjon//DTD//XML Forhandling 2.0//NO" [] >
+-->
+<!--
+     18 sep 2008 - PRO/Type-it AS: Lagt til sakid attributt for mote, dagsorden, spm og votering . 
+                                   Endret attributtet for sak fra <!ATTLIST sak  id ID #IMPLIED > til <!ATTLIST sak  sakid CDATA #IMPLIED >
+      04.04.2008 - SOJ: Lagt til attributt for sak og sakdel
+ -->
+
+<!ENTITY % a.vot  "(presinnl|innlegg|merknad|subtit|handling|blokksitat|table|liste|a|paragraf)*" >
+<!ENTITY % a.el  "a|liste|tabell|blokksitat" >
+<!ENTITY % a.el.sub  "#PCDATA|kildedok|uth|navn|anf|note|fotnote" >
+<!ENTITY % bodyatt  "" >
+<!ENTITY % debatt  "presinnl|innlegg|merknad" >
+<!ENTITY % lov.el  "underkap|samletit|ledd|nr|bokstav" >
+<!ENTITY % lov.sub.el  "#PCDATA|ledd|nr|bokstav|note|fotnote|liste|anf|lovendr" >
+<!ENTITY % paracon  "#PCDATA" >
+<!ENTITY % s.sub  "budsj-endring|a|liste|tabell|blokksitat|presinnl|innlegg|merknad" >
+<!ENTITY % secur  "" >
+<!ENTITY % tbl.entry.excep  "" >
+<!ENTITY % tbl.entrytbl.excep  " -(entrytbl)" >
+<!ENTITY % tbl.entrytbl.mdl  "colspec*,spanspec*,thead?,tbody" >
+<!ENTITY % tbl.hdft.excep  "-(entrytbl)" >
+<!ENTITY % tbl.hdft.mdl  "colspec*,row+" >
+<!ENTITY % tbl.hdft.name  "(thead|tfoot)" >
+<!ENTITY % tbl.row.excep  "" >
+<!ENTITY % tbl.row.mdl  "entry" >
+<!ENTITY % tbl.table-main.mdl  "(tgroup+|bilde+)" >
+<!ENTITY % tbl.table-titles.mdl  "tit?" >
+<!ENTITY % tbl.table.att  
+               "tabstyle	NMTOKEN	#IMPLIED
+		tocentry	NUMBER	#IMPLIED
+		shortentry	NUMBER	#IMPLIED
+		orient	(port|land)	#IMPLIED
+		pgwide	NUMBER 	#IMPLIED" >
+<!ENTITY % tbl.table.excep  "-(tabell)" >
+<!ENTITY % tbl.table.mdl  "tit?, (tgroup+|bilde+)" >
+<!ENTITY % tbl.table.name  "(table)" >
+<!ENTITY % tbl.tgroup.att  "tgroupstyle	NMTOKEN	#IMPLIED" >
+<!ENTITY % tbl.tgroup.mdl  "colspec*,spanspec*,thead?,tfoot?,tbody" >
+<!ENTITY % titles  "tit?" >
+<!ENTITY % yesorno  "number" >
+
+<!ELEMENT a  (#PCDATA|kildedok|uth|anf|sitat|note|fotnote|sup|sub)* >
+
+<!ATTLIST a   type (uinnrykk|minnrykk|1|2|3|4)  "uinnrykk" >
+
+<!ELEMENT aar  (#PCDATA) >
+
+<!ELEMENT anf  (#PCDATA) >
+
+<!ELEMENT bilde   EMPTY >
+
+<!ATTLIST bilde
+               filnavn  CDATA    #REQUIRED 
+               entity  ENTITY    #REQUIRED >
+
+<!ELEMENT blokksitat  (a|liste)+ >
+
+<!ATTLIST blokksitat   type (uinnrykk|minnrykk|1|2|3|4)  "uinnrykk" >
+
+<!ELEMENT colspec   EMPTY >
+
+<!ATTLIST colspec
+               colnum  CDATA    #IMPLIED 
+               colname  CDATA    #IMPLIED 
+               colwidth  CDATA    #IMPLIED 
+               colsep  CDATA    #IMPLIED 
+               cowsep  CDATA    #IMPLIED 
+               clign (left|right|center|justify|char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  CDATA    #IMPLIED >
+
+<!ELEMENT dagsnr  (#PCDATA) >
+
+<!ELEMENT dagsorden  (tit,dagsnr?,(a+|(ordennr,saktit+)+)*) >
+<!ATTLIST dagsorden   sakid CDATA #IMPLIED >
+
+<!ELEMENT dato  (#PCDATA) >
+
+<!ELEMENT del  (innstillet?,tit?,%a.vot;,subdel*,votering*) >
+
+<!ELEMENT entry  (#PCDATA|uth|sup|sub|a)* >
+
+<!ATTLIST entry
+               colname  CDATA    #IMPLIED 
+               namest  CDATA    #IMPLIED 
+               nameend  CDATA    #IMPLIED 
+               spanname  CDATA    #IMPLIED 
+               morerows  CDATA    #IMPLIED 
+               colsep  CDATA    #IMPLIED 
+               rowsep  CDATA    #IMPLIED 
+               align (left|right|center|justify|char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  CDATA    #IMPLIED 
+               rotate  CDATA    #IMPLIED 
+               valign (top|middle|bottom)   #IMPLIED 
+               type (head|body)   #IMPLIED >
+
+<!ELEMENT folkevalgte  (stortingstidende,inneholdende,aar,periode,forhtit,a*,fylke*,sammentreden) >
+
+<!ELEMENT forhandling  (omslag?,mote+) >
+<!ATTLIST mote   sakid CDATA #IMPLIED >
+
+<!ELEMENT forhtit  (#PCDATA) >
+
+<!ELEMENT formalia  (dato,president,dagsorden+,(kongen|presinnl|innlegg|merknad|subtit|votering|handling)*) >
+
+<!ELEMENT fotnote  (#PCDATA) >
+
+<!ELEMENT funksjon  (#PCDATA) >
+
+<!ELEMENT fylke  (tit,repr,vara+) >
+
+<!ELEMENT handling  (a|liste|table|blokksitat)* >
+
+<!ELEMENT hevet  (%a.vot;,slutt,a*) >
+
+<!ELEMENT inneholdende  (#PCDATA) >
+
+<!ELEMENT innlegg  (navn,funksjon?,merknad?,(a|liste|table|blokksitat)*) >
+
+<!ATTLIST innlegg   type (replikk|hovedinnlegg)   #IMPLIED >
+
+<!ELEMENT innstillet  (#PCDATA|fotnote)* >
+
+<!ELEMENT kapittel  (innstillet?,tit?,%a.vot;,subdel*,votering*) >
+
+<!ELEMENT kildedok  (#PCDATA) >
+
+<!ELEMENT kongen  (a+) >
+
+<!ELEMENT liste  (tit?,merke?,pkt)+ >
+
+<!ATTLIST liste  type (strek|alfa|rom|num|opprams|fri)  "strek" >
+
+<!ELEMENT lovbokstav  (#PCDATA|uth)* >
+
+<!ELEMENT lovdel  ((lovtit|lovbokstav|tit|innstillet)*,omhandler?,%a.vot;,subdel*,votering*) >
+
+<!ELEMENT lovtit  (#PCDATA|uth)* >
+
+<!ELEMENT merke  (#PCDATA) >
+
+<!ATTLIST merke  plassering (venstre|hoyre)  "hoyre" >
+
+<!ELEMENT merknad  (#PCDATA|uth|fotnote)* >
+
+<!ELEMENT mote  (folkevalgte?, formalia*, (saker|voteringer|sakreferat)*,hevet) >
+
+<!ELEMENT navn  (#PCDATA) >
+
+<!ELEMENT note  (#PCDATA) >
+
+<!ELEMENT omhandler  (tit,a) >
+
+<!ELEMENT ordennr  (#PCDATA) >
+
+<!ELEMENT paragraf  (tit,(a|blokksitat|liste|note|fotnote|table|uth)*) >
+
+<!ATTLIST paragraf   type (uinnrykk|minnrykk|1|2|3|4)  "uinnrykk" >
+
+<!ELEMENT periode  (#PCDATA) >
+
+<!ELEMENT pkt  (a|liste|table|blokksitat)+ >
+
+<!ELEMENT president  (#PCDATA|uth)* >
+
+<!ELEMENT presinnl  (a|liste|merknad|table|blokksitat)* >
+
+<!ELEMENT referat  (tit,(%a.vot;|votering|refliste)+) >
+
+<!ELEMENT refliste  (refpkt+) >
+
+<!ELEMENT refnr  (#PCDATA) >
+
+<!ELEMENT refpkt  (merke?,refnr?,(a|liste)+) >
+
+<!ELEMENT refspm  (a|liste|table|blokksitat)* >
+
+<!ELEMENT repr  (tit,subtit?,liste+) >
+
+<!ELEMENT romerdel  (innstillet?,tit?,%a.vot;,subdel*,votering*) >
+
+<!ELEMENT row  (entry+) >
+
+<!ATTLIST row
+               rowsep  CDATA    #IMPLIED 
+               valign (top|middle|bottom)   #IMPLIED >
+
+<!ELEMENT sak  (sakshode,(presinnl|innlegg|merknad|saktit|subtit|handling|votering|voteringer)*) >
+<!-- <!ATTLIST sak  id ID #IMPLIED > -->
+<!ATTLIST sak  sakid CDATA #IMPLIED >
+
+<!ELEMENT sakdel  (tit?,innstillet?,%a.vot;, (lovdel|del|kapittel|romerdel|subdel|votering)*) >
+<!ATTLIST sakdel   sakid CDATA #IMPLIED >
+
+<!ELEMENT saker  (sporretime|sak|sakreferat)* >
+
+<!ELEMENT sakreferat  (tit?,referat+) >
+
+<!ELEMENT sakshode  (tit?,saktit*,kildedok?) >
+
+<!ELEMENT saktit  (#PCDATA|kildedok|uth|navn|anf|note|fotnote|sup|sub)* >
+
+<!ELEMENT sammentreden  (tit,(presinnl|innlegg|merknad|subtit|handling|a|liste|votering)*,referat?) >
+
+<!ELEMENT sitat  (#PCDATA) >
+
+<!ELEMENT slutt  (#PCDATA) >
+
+<!ELEMENT spanspec   EMPTY >
+
+<!ATTLIST spanspec
+               namest  CDATA    #REQUIRED 
+               nameend  CDATA    #REQUIRED 
+               spanname  CDATA    #REQUIRED 
+               colsep  CDATA    #IMPLIED 
+               rowsep  CDATA    #IMPLIED 
+               align (left|right|center|justify|char)   #IMPLIED 
+               char  CDATA    #IMPLIED 
+               charoff  CDATA    #IMPLIED >
+
+<!ELEMENT spm  (tit,refspm*,(presinnl|innlegg|merknad|subtit|handling)*) >
+<!ATTLIST spm   sakid CDATA #IMPLIED >
+
+<!ELEMENT sporretime  (sakshode,liste?,(innlegg|presinnl|merknad|subtit|handling)*,spm*) >
+
+<!ELEMENT stortingstidende  (#PCDATA) >
+
+<!ELEMENT sub  (#PCDATA) >
+
+<!ELEMENT subdel  (innstillet?,tit?,%a.vot;,votering*) >
+
+<!ELEMENT subtit  (#PCDATA|uth)* >
+
+<!ELEMENT sup  (#PCDATA) >
+
+<!ELEMENT table  (title?,(tgroup+|bilde+)) >
+
+<!ATTLIST table
+               frame (top|bottom|topbot|all|sides|none)   #IMPLIED 
+               colsep  CDATA    #IMPLIED 
+               rowsep  CDATA    #IMPLIED 
+               tabstyle  CDATA    #IMPLIED 
+               tocentry  CDATA    #IMPLIED 
+               shortentry  CDATA    #IMPLIED 
+               orient (port|land)   #IMPLIED 
+               pgwide  CDATA    #IMPLIED 
+               id  ID    #IMPLIED >
+
+<!ELEMENT tbody  (row+) >
+
+<!ATTLIST tbody  valign (top|middle|bottom)   #IMPLIED >
+
+<!ELEMENT tfoot  (colspec*,row+) >
+
+<!ATTLIST tfoot  valign (top|middle|bottom)   #IMPLIED >
+
+<!ELEMENT tgroup  (colspec*,spanspec*,title?,thead?,tfoot?,tbody) >
+
+<!ATTLIST tgroup
+               cols  NMTOKEN    #IMPLIED 
+               tgroupstyle  NMTOKEN    #IMPLIED 
+               colsep  NMTOKEN    #IMPLIED 
+               rowsep  NMTOKEN    #IMPLIED 
+               align (left|right|center|justify|char)  "left"
+               charoff  NMTOKEN   "50"
+               char  CDATA   ""
+               security (u|c|s)  "u" >
+
+<!ELEMENT thead  (colspec*,row+) >
+
+<!ATTLIST thead  valign (top|middle|bottom)   #IMPLIED >
+
+<!ELEMENT tit  (#PCDATA|anf|uth|sup|sub|fotnote)* >
+
+<!ELEMENT title  (#PCDATA|uth)* >
+
+<!ELEMENT uth  (#PCDATA) >
+
+<!ATTLIST uth  type (fet|kursiv|fetkursiv|sperret)  "fet" >
+
+<!ELEMENT vara  (tit?,(subtit?,liste)+) >
+
+<!ELEMENT votering  (tit|%a.vot;)* >
+<!ATTLIST votering   sakid CDATA #IMPLIED >
+
+<!ELEMENT voteringer  (%a.vot;,sakdel+, (lovdel|romerdel|votering|presinnl)*) >
+
+<!ELEMENT bildegrp  (bilde) >
+
+<!ELEMENT forhnr  (#PCDATA) >
+
+<!ELEMENT fork  (#PCDATA) >
+
+<!ELEMENT innhfrt  (dato,(merknad?,saktit,side)+) >
+
+<!ELEMENT omslag  (titgrp,innhfrt?,talere,partibet) >
+
+<!ELEMENT parti  (#PCDATA) >
+
+<!ELEMENT partibet  (tit,(fork,partinavn)+) >
+
+<!ELEMENT partinavn  (#PCDATA) >
+
+<!ELEMENT sesjon  (#PCDATA) >
+
+<!ELEMENT side  (#PCDATA) >
+
+<!ELEMENT talere  (tit,(navn,parti,side)+) >
+
+<!ELEMENT titgrp  (bildegrp,tit,utit,forhnr,dato,sesjon) >
+
+<!ELEMENT utit  (#PCDATA) >
+<!ENTITY shy         "&#x00AD;"> <!-- SOFT HYPHEN -->
