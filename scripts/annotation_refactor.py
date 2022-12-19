@@ -10,19 +10,29 @@ import argparse
 from glob import glob
 from tqdm import tqdm
 from dhlab.nbtokenizer import tokenize
-from scripts.stortingsdata.constants import NS
+from stortingsdata.constants import NS
 
-from scripts.stortingsdata.utils import debug, pprint
+from stortingsdata.dhlab_sent_tokenizer import dhlab_sent_tokenize
+
+from stortingsdata.utils import debug, pprint
 import logging
 
-logging.basicConfig(filename="/home/larsm/projects/parlamint/logs/docannotator.log",
-                    level=logging.INFO
+from datetime import datetime
+
+now = datetime.now().strftime("%Y%m%d%H%M%S")
+
+logging.basicConfig(filename=f"/home/larsm/projects/parlamint/logs/docannotator_partial_{now}.log",
+                    level=logging.ERROR
                     )
+
+spacy.require_gpu()
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--input")
 args = parser.parse_args()
+
+
 
 class DocAnnotater:
     def __init__(self, file) -> None:
@@ -33,8 +43,9 @@ class DocAnnotater:
         self.update_ids_and_names(xml, file)
 
         #self.nlp = spacy.load("annotation/model-best/")
+        
         self.nlp = spacy.load("/home/larsm/projects/parlamint/ParlaMint-NO-scripts/scripts/annotation/spacy-models/model-best")
-
+        #
         for seg in tqdm(xml.findall("//seg", NS)):
             self.process_seg(seg)
 
@@ -57,6 +68,12 @@ class DocAnnotater:
         
         
         sents = nltk.tokenize.sent_tokenize(text, language='norwegian')
+        #sents = list(dhlab_sent_tokenize(text))
+        
+        #assert " ".join(sents) == text, f"{seg.attrib}\t{sents}\t{text}"
+        
+        #assert len(sents) == len(sents_2), f"{et.tostring(seg).decode()}    {sents} {sents_2}   {text}"
+                
         seg_id = seg.attrib['{http://www.w3.org/XML/1998/namespace}id']
         seg.text = ''
 
@@ -75,17 +92,22 @@ class DocAnnotater:
     def process_sent(self, sent, sent_id, s_elem):
         #nlp = spacy.load("/home/larsm/my_projects/stortingsdata/annotation/model-best/")
 
-        tokens = self.nlp(sent)
+        tokens_1 = self.nlp(sent)
 
+        # filter nonestadard whitespace
+        tokens = [x for x in tokens_1 if not x.is_space]
+        if len(tokens) != len(tokens_1):
+            logging.error(f"{str(s_elem.attrib)} has whitespace")
+        
         # Set word id dict
         self.word_ids = dict()
 
         w_count = 1
         for token in tokens:
-            if not token.is_space:
-                word_id = sent_id + '.' + str(w_count)
-                self.process_token(token, word_id, s_elem)
-                w_count += 1
+           # if not token.is_space:
+            word_id = sent_id + '.' + str(w_count)
+            self.process_token(token, word_id, s_elem)
+            w_count += 1
 
         self.syntactic_parses(tokens, s_elem)
         
@@ -164,11 +186,17 @@ class DocAnnotater:
         root_count = 0
         for t in tokens:
             link = et.SubElement(linkGrp, 'link')
+            
+            # DEBUG
+            #assert t.i in self.word_ids.keys(), f"{t.i}\t-{t}- token"
+            #assert t.head.i in self.word_ids.keys(), f"{t.i}\t-{t}- token"
+           
+            
             # lower and replace
             ## Set value
             value = f"ud-syn:{t.dep_.lower().replace(':', '_')}"
-            target = self.word_ids[t.head.i]
-            self_id = self.word_ids[t.i]
+            target = self.word_ids.get(t.head.i, 0)
+            self_id = self.word_ids.get(t.i, 0)
             
             if value == "ud-syn:root":
                 root_count += 1
@@ -179,6 +207,7 @@ class DocAnnotater:
                     
                     
                 else:
+                    # Normal root
                     # Set extra root to point to this
                     root_id = self_id
                     target = s_elem.attrib['{http://www.w3.org/XML/1998/namespace}id']
@@ -207,7 +236,7 @@ class DocAnnotater:
 
     def insert_note(self, seg):
         sents = seg.findall('s')
-        assert len(sents) > 0, " Did not find sents"
+        assert len(sents) > 0, f" Did not find sents {et.tostring(seg)}"
 
         for key, val in self.note_dct.items():
             logging.info("inserting in-segment note %s %s", key, val)
@@ -235,7 +264,7 @@ class DocAnnotater:
         
         # Append note to end of sentence
         return sent, -1        
-        
+        #raise ValueError("find sentence missed the target")
 
         
     @staticmethod
@@ -292,18 +321,26 @@ class DocAnnotater:
 def main():
     logging.info("Starting new parse...")
     
+    ana_file_names = [x.split(".")[0] for x in glob("*.ana.xml")]  
+    
+    files = list()
+    for file in glob('*.xml'):
+        if file.split('.')[0] != "ParlaMint-NO":
+                if "ana" not in file.split("."):
+                    if file.split('.')[0] not in ana_file_names:
+                        files.append(file)
+    
+    
     if args.input:
         DocAnnotater(args.input)
     else:   
-        for doc in glob('*.xml'):
-            if doc.split('.')[0] != "ParlaMint-NO":
-                if "ana" not in doc.split("."):
-                    logging.info(f"Now annotating {doc}")
-                    try:    
-                        DocAnnotater(doc)
-                    except Exception as e:
-                        logging.error("%s failed with %s", doc, e)
-                        
+        for doc in tqdm(files):
+            logging.info(f"Now annotating {doc}")
+            try:    
+                DocAnnotater(doc)
+            except Exception as e:
+                logging.error(f"{doc} failed with {e}")
+            
 
     logging.info("Program finished!\n")
     

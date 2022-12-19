@@ -33,3 +33,10 @@ def apply_to_component_files(func):
             func(xml)
             
             xml.write(x, pretty_print=True, encoding='utf-8')
+
+def apply_to_file(func, file):
+    parser = et.XMLParser(remove_blank_text=True)    
+    xml = et.parse(file, parser)    
+    func(xml)  
+    xml.write(file, pretty_print=True, encoding='utf-8')
+    
